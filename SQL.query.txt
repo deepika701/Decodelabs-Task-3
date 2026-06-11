@@ -1,0 +1,40 @@
+CREATE TABLE orders (
+    OrderID VARCHAR(20),
+    Date VARCHAR(20),
+    CustomerID VARCHAR(20),
+    Product VARCHAR(100),
+    Quantity INT,
+    UnitPrice NUMERIC,
+    ShippingAddress TEXT,
+    PaymentMethod VARCHAR(50),
+    OrderStatus VARCHAR(50),
+    TrackingNumber VARCHAR(50),
+    ItemsInCart INT,
+    CouponCode VARCHAR,
+    ReferralSource VARCHAR,
+    TotalPrice NUMERIC
+);
+1.--use select command
+select* from orders;
+2.-- where command
+select*
+    from orders
+	where orderstatus='Delivered';
+
+3.--Sum count aggregation groupby,orderby
+select
+     product as orders_product,
+	 count(quantity) as orders_quantity,
+	 sum(totalprice) as total_sale
+     from orders
+	 group by product
+	 order by product asc;
+4.-- find avg of totalsale
+select
+  avg(totalprice)
+  from orders;
+5-- summarize payment method 
+SELECT PaymentMethod, COUNT(*)
+FROM orders
+GROUP BY PaymentMethod
+order by paymentmethod asc;
